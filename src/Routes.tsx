@@ -12,7 +12,7 @@ const Stack = createStackNavigator();
 export const Routes: React.FC<RoutesProps> = ({}) => {
   return (
     <NavigationContainer>
-      <Stack.Navigator>
+      <Stack.Navigator initialRouteName="Login">
         <Stack.Screen name="Login" component={LoginScreen} />
         <Stack.Screen name="Register" component={RegisterScreen} />
       </Stack.Navigator>
