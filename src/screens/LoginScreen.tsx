@@ -20,7 +20,7 @@ export const LoginScreen: React.FC<LoginScreenProps> = ({
       <Text>{route.name} Screen</Text>
       <Button
         title="Navigate to Register screen"
-        onPress={() => navigation.navigate('Login')}
+        onPress={() => navigation.navigate('Register')}
       />
     </Center>
   );
