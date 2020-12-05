@@ -3,6 +3,6 @@ export type AuthStackParamList = {
   Register: undefined;
 };
 
-export type HomeStackParamList = {
+export type HomeTabsParamList = {
   Home: undefined;
 };

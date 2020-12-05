@@ -3,7 +3,7 @@ import {ActivityIndicator, Text} from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
 import {AuthContext} from './contexts';
 import {Center} from './components';
-import {HomeStack, AuthStack} from './navigation';
+import {HomeTabs, AuthStack} from './navigation';
 
 interface RoutesProps {}
 
@@ -21,7 +21,7 @@ export const Routes: React.FC<RoutesProps> = ({}) => {
 
   return (
     <NavigationContainer>
-      {user ? <HomeStack /> : <AuthStack />}
+      {user ? <HomeTabs /> : <AuthStack />}
     </NavigationContainer>
   );
 };

@@ -1,1 +1,1 @@
-export type {AuthStackParamList, HomeStackParamList} from './navigation';
+export type {AuthStackParamList, HomeTabsParamList} from './navigation';
