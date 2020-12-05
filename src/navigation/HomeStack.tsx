@@ -1,11 +1,11 @@
 import React from 'react';
 import {createStackNavigator} from '@react-navigation/stack';
 import {HomeScreen} from '../screens';
-import {RootStackParamList} from '../types';
+import {HomeStackParamList} from '../types';
 
 interface HomeStackProps {}
 
-const Stack = createStackNavigator<RootStackParamList>();
+const Stack = createStackNavigator<HomeStackParamList>();
 
 export const HomeStack: React.FC<HomeStackProps> = ({}) => {
   return (
