@@ -8,15 +8,15 @@ import {RegisterScreen} from './screens/RegisterScreen';
 
 interface RoutesProps {}
 
-const Stack = createStackNavigator<RootStackParamList>();
+const AuthStack = createStackNavigator<RootStackParamList>();
 
 export const Routes: React.FC<RoutesProps> = ({}) => {
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="Login">
-        <Stack.Screen name="Login" component={LoginScreen} />
-        <Stack.Screen name="Register" component={RegisterScreen} />
-      </Stack.Navigator>
+      <AuthStack.Navigator initialRouteName="Login">
+        <AuthStack.Screen name="Login" component={LoginScreen} />
+        <AuthStack.Screen name="Register" component={RegisterScreen} />
+      </AuthStack.Navigator>
     </NavigationContainer>
   );
 };

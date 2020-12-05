@@ -1,3 +1,4 @@
+import AsyncStorage from '@react-native-community/async-storage';
 import React, {useState} from 'react';
 
 type User = null | {username: string};
@@ -19,14 +20,16 @@ export const AuthContext = React.createContext<AuthContext>({
 export const AuthProvider: React.FC<AuthProviderProps> = ({children}) => {
   const [user, setUser] = useState<User>(null);
 
-  // Simulate an async request with setTimeout to grab the user
-  const login = () =>
-    setTimeout(() => {
-      const fakeUser = {username: 'Santa'};
-      setUser(fakeUser);
-    }, 500);
+  const login = async () => {
+    const fakeUser = {username: 'Santa'};
+    await AsyncStorage.setItem('user', JSON.stringify(fakeUser));
+    setUser(fakeUser);
+  };
 
-  const logout = () => setUser(null);
+  const logout = async () => {
+    await AsyncStorage.removeItem('user');
+    setUser(null);
+  };
 
   const contextValue = {
     user,
