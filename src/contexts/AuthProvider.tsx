@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import AsyncStorage from '@react-native-community/async-storage';
+import {localStorage} from '../modules';
 
 type User = null | {username: string};
 
@@ -25,12 +25,12 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({children}) => {
 
   const login = async () => {
     const fakeUser = {username: 'Santa'};
-    await AsyncStorage.setItem('user', JSON.stringify(fakeUser));
+    await localStorage.set('user', fakeUser);
     setUser(fakeUser);
   };
 
   const logout = async () => {
-    await AsyncStorage.removeItem('user');
+    await localStorage.remove('user');
     setUser(null);
   };
 
@@ -42,9 +42,9 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({children}) => {
   };
 
   useEffect(() => {
-    AsyncStorage.getItem('user')
-      .then((userJson) => setUser(JSON.parse(userJson)))
-      .catch((err) => console.log(err))
+    localStorage
+      .get('user')
+      .then((userData) => setUser(userData))
       .finally(() => setLoading(false));
   }, []);
 
