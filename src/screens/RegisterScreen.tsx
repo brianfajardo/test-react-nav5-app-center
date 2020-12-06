@@ -3,11 +3,11 @@ import {Button, Text} from 'react-native';
 import {StackNavigationProp} from '@react-navigation/stack';
 import {RouteProp} from '@react-navigation/native';
 import {Center} from '../components';
-import {RootStackParamList} from '../types';
+import {AuthStackParamList} from '../types';
 
 interface RegisterScreenProps {
-  navigation: StackNavigationProp<RootStackParamList, 'Register'>;
-  route: RouteProp<RootStackParamList, 'Register'>;
+  navigation: StackNavigationProp<AuthStackParamList, 'Register'>;
+  route: RouteProp<AuthStackParamList, 'Register'>;
 }
 
 export const RegisterScreen: React.FC<RegisterScreenProps> = ({

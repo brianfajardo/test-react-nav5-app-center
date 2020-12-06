@@ -4,11 +4,11 @@ import React, {useContext} from 'react';
 import {Button, Text} from 'react-native';
 import {Center} from '../components';
 import {AuthContext} from '../contexts';
-import {RootStackParamList} from '../types';
+import {AuthStackParamList} from '../types';
 
 interface LoginScreenProps {
-  navigation: StackNavigationProp<RootStackParamList, 'Login'>;
-  route: RouteProp<RootStackParamList, 'Login'>;
+  navigation: StackNavigationProp<AuthStackParamList, 'Login'>;
+  route: RouteProp<AuthStackParamList, 'Login'>;
 }
 
 export const LoginScreen: React.FC<LoginScreenProps> = ({

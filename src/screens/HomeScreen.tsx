@@ -2,11 +2,11 @@ import React, {useContext} from 'react';
 import {RouteProp} from '@react-navigation/native';
 import {Button, Text} from 'react-native';
 import {Center} from '../components';
-import {HomeStackParamList} from '../types';
+import {HomeTabsParamList} from '../types';
 import {AuthContext} from '../contexts';
 
 interface HomeScreenProps {
-  route: RouteProp<HomeStackParamList, 'Home'>;
+  route: RouteProp<HomeTabsParamList, 'Home'>;
 }
 
 export const HomeScreen: React.FC<HomeScreenProps> = ({route}) => {
