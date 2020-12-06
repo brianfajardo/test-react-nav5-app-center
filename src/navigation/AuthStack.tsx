@@ -3,7 +3,7 @@ import {
   createStackNavigator,
   StackNavigationOptions,
 } from '@react-navigation/stack';
-import {AuthStackParamList} from '../types';
+import {AuthStackParamList, Routes} from '../types';
 import {LoginScreen, RegisterScreen} from '../screens';
 
 interface AuthStackProps {}
@@ -16,9 +16,11 @@ export const AuthStack: React.FC<AuthStackProps> = ({}) => {
   };
 
   return (
-    <Stack.Navigator initialRouteName="Login" screenOptions={screenOptions}>
-      <Stack.Screen name="Login" component={LoginScreen} />
-      <Stack.Screen name="Register" component={RegisterScreen} />
+    <Stack.Navigator
+      initialRouteName={Routes.Login}
+      screenOptions={screenOptions}>
+      <Stack.Screen name={Routes.Login} component={LoginScreen} />
+      <Stack.Screen name={Routes.Register} component={RegisterScreen} />
     </Stack.Navigator>
   );
 };

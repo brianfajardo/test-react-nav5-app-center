@@ -8,11 +8,12 @@ import {
   createBottomTabNavigator,
 } from '@react-navigation/bottom-tabs';
 import {RouteProp} from '@react-navigation/native';
+import {Routes} from '../types';
 
 type HomeTabsScreenOptions = ({
   route,
 }: {
-  route: RouteProp<HomeTabsParamList, 'Home'>;
+  route: RouteProp<HomeTabsParamList, Routes.Home>;
 }) => BottomTabNavigationOptions;
 
 interface HomeTabsProps {}
@@ -24,9 +25,9 @@ export const HomeTabs: React.FC<HomeTabsProps> = ({}) => {
     tabBarIcon: ({focused, color, size}) => {
       let iconName = 'bug';
 
-      if (route.name === 'Home') {
+      if (route.name === Routes.Home) {
         iconName = focused ? 'home' : 'home-outline';
-      } else if (route.name === 'Search') {
+      } else if (route.name === Routes.Search) {
         iconName = focused ? 'rocket' : 'rocket-outline';
       } else {
         console.warn(`No tab bar icon set for route: ${route.name}`);
@@ -43,8 +44,8 @@ export const HomeTabs: React.FC<HomeTabsProps> = ({}) => {
 
   return (
     <Tabs.Navigator screenOptions={screenOptions} tabBarOptions={tabBarOptions}>
-      <Tabs.Screen name="Home" component={HomeScreen} />
-      <Tabs.Screen name="Search" component={SearchScreen} />
+      <Tabs.Screen name={Routes.Home} component={HomeScreen} />
+      <Tabs.Screen name={Routes.Search} component={SearchScreen} />
     </Tabs.Navigator>
   );
 };

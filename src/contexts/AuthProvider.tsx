@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import {localStorage} from '../modules';
+import {LSKeys} from '../types';
 
 type User = null | {username: string};
 
@@ -25,12 +26,12 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({children}) => {
 
   const login = async () => {
     const fakeUser = {username: 'Santa'};
-    await localStorage.set('user', fakeUser);
+    await localStorage.set(LSKeys.User, fakeUser);
     setUser(fakeUser);
   };
 
   const logout = async () => {
-    await localStorage.remove('user');
+    await localStorage.remove(LSKeys.User);
     setUser(null);
   };
 
@@ -43,7 +44,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({children}) => {
 
   useEffect(() => {
     localStorage
-      .get('user')
+      .get(LSKeys.User)
       .then((userData) => setUser(userData))
       .finally(() => setLoading(false));
   }, []);
