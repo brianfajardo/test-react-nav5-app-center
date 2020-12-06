@@ -1,17 +1,17 @@
-import React from 'react';
-import {Text} from 'react-native';
-import {RouteProp} from '@react-navigation/native';
-import {Center} from '../components';
-import {HomeTabsParamList} from '../types';
+import React from 'react'
+import { Text } from 'react-native'
+import { RouteProp } from '@react-navigation/native'
+import { Center } from '../components'
+import { HomeTabsParamList, Routes } from '../types'
 
-interface SearchScreenProps {
-  route: RouteProp<HomeTabsParamList, 'Search'>;
+type Props = {
+  route: RouteProp<HomeTabsParamList, Routes.Search>
 }
 
-export const SearchScreen: React.FC<SearchScreenProps> = ({route}) => {
+export const SearchScreen: React.FC<Props> = ({ route }) => {
   return (
     <Center>
       <Text>{route.name} Screen</Text>
     </Center>
-  );
-};
+  )
+}

@@ -1,1 +1,1 @@
-export {Center} from './Center';
+export { Center } from './Center'

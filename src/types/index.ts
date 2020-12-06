@@ -1,6 +1,6 @@
 // Enums
-export {Routes} from './navigation';
-export {LSKeys} from './localStorage';
+export { Routes } from './navigation'
+export { LSKeys } from './localStorage'
 
 // Types
-export type {AuthStackParamList, HomeTabsParamList} from './navigation';
+export type { AuthStackParamList, HomeTabsParamList } from './navigation'

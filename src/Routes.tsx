@@ -1,14 +1,14 @@
-import React, {useContext} from 'react';
-import {ActivityIndicator, Text} from 'react-native';
-import {NavigationContainer} from '@react-navigation/native';
-import {AuthContext} from './contexts';
-import {Center} from './components';
-import {HomeTabs, AuthStack} from './navigation';
+import React, { useContext } from 'react'
+import { ActivityIndicator, Text } from 'react-native'
+import { NavigationContainer } from '@react-navigation/native'
+import { AuthContext } from './contexts'
+import { Center } from './components'
+import { HomeTabs, AuthStack } from './navigation'
 
-interface RoutesProps {}
+type Props = Record<string, unknown>
 
-export const Routes: React.FC<RoutesProps> = ({}) => {
-  const {user, loading} = useContext(AuthContext);
+export const Routes: React.FC<Props> = () => {
+  const { user, loading } = useContext(AuthContext)
 
   if (loading) {
     return (
@@ -16,12 +16,12 @@ export const Routes: React.FC<RoutesProps> = ({}) => {
         <Text>One sec, making sure you exist.</Text>
         <ActivityIndicator size="large" />
       </Center>
-    );
+    )
   }
 
   return (
     <NavigationContainer>
       {user ? <HomeTabs /> : <AuthStack />}
     </NavigationContainer>
-  );
-};
+  )
+}

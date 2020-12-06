@@ -1,8 +1,10 @@
-import React from 'react';
-import {AuthProvider} from './contexts';
+import React, { ReactNode } from 'react'
+import { AuthProvider } from './contexts'
 
-interface ProvidersProps {}
+type Props = {
+  children: ReactNode
+}
 
-export const Providers: React.FC<ProvidersProps> = ({children}) => {
-  return <AuthProvider>{children}</AuthProvider>;
-};
+export const Providers: React.FC<Props> = ({ children }) => {
+  return <AuthProvider>{children}</AuthProvider>
+}

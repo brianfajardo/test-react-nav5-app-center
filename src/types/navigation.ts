@@ -6,11 +6,11 @@ export enum Routes {
 }
 
 export type AuthStackParamList = {
-  [Routes.Login]: undefined;
-  [Routes.Register]: undefined;
-};
+  [Routes.Login]: undefined
+  [Routes.Register]: undefined
+}
 
 export type HomeTabsParamList = {
-  [Routes.Home]: undefined;
-  [Routes.Search]: undefined;
-};
+  [Routes.Home]: undefined
+  [Routes.Search]: undefined
+}

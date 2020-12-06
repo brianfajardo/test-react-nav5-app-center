@@ -1,11 +1,13 @@
-import React from 'react';
-import {StyleSheet, View} from 'react-native';
+import React, { ReactNode } from 'react'
+import { StyleSheet, View } from 'react-native'
 
-interface CenterProps {}
+type Props = {
+  children: ReactNode
+}
 
-export const Center: React.FC<CenterProps> = ({children}) => {
-  return <View style={styles.container}>{children}</View>;
-};
+export const Center: React.FC<Props> = ({ children }) => {
+  return <View style={styles.container}>{children}</View>
+}
 
 const styles = StyleSheet.create({
   container: {
@@ -13,4 +15,4 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
-});
+})

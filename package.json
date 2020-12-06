@@ -7,7 +7,8 @@
     "ios": "react-native run-ios",
     "start": "react-native start",
     "test": "jest",
-    "lint": "eslint . --ext .js,.jsx,.ts,.tsx"
+    "lint": "eslint index.js App.tsx 'src/**/*' --ext .js,.ts.tsx --fix",
+    "format": "prettier index.js App.tsx 'src/**/*' --check"
   },
   "dependencies": {
     "@react-native-community/async-storage": "^1.12.1",
@@ -16,7 +17,6 @@
     "@react-navigation/drawer": "^5.11.4",
     "@react-navigation/native": "^5.8.10",
     "@react-navigation/stack": "^5.12.8",
-    "@types/react-native-vector-icons": "^6.4.6",
     "react": "16.13.1",
     "react-native": "0.63.3",
     "react-native-gesture-handler": "^1.9.0",
@@ -31,12 +31,17 @@
     "@react-native-community/eslint-config": "^1.1.0",
     "@types/jest": "^25.2.3",
     "@types/react-native": "^0.63.2",
+    "@types/react-native-vector-icons": "^6.4.6",
     "@types/react-test-renderer": "^16.9.2",
-    "@typescript-eslint/eslint-plugin": "^2.27.0",
-    "@typescript-eslint/parser": "^2.27.0",
+    "@typescript-eslint/eslint-plugin": "^4.9.0",
+    "@typescript-eslint/parser": "^4.9.0",
     "babel-jest": "^25.1.0",
     "eslint": "^6.5.1",
+    "eslint-plugin-prettier": "^3.2.0",
+    "eslint-plugin-react-hooks": "^4.2.0",
+    "husky": "^4.3.4",
     "jest": "^25.1.0",
+    "lint-staged": "^10.5.3",
     "metro-react-native-babel-preset": "^0.59.0",
     "react-test-renderer": "16.13.1",
     "typescript": "^3.8.3"
@@ -51,5 +56,24 @@
       "json",
       "node"
     ]
+  },
+  "lint-staged": {
+    "index.js": [
+      "eslint index.js --fix",
+      "prettier index.js --write"
+    ],
+    "App.tsx": [
+      "eslint App.tsx --fix",
+      "prettier App.tsx --write"
+    ],
+    "src/**/*.{ts,tsx}": [
+      "eslint 'src/**/*' --ext .ts,.tsx --fix",
+      "prettier 'src/**/*' --write"
+    ]
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
   }
 }

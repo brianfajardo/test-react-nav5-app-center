@@ -1,2 +1,2 @@
-export {AuthStack} from './AuthStack';
-export {HomeTabs} from './HomeTabs';
+export { AuthStack } from './AuthStack'
+export { HomeTabs } from './HomeTabs'
