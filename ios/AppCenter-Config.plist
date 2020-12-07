@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<!--
+   AppCenter-Config.plist
+   reactNavigation5
+
+   Created by Brian Fajardo on 2020-12-06.
+   Copyright (c) 2020 ___ORGANIZATIONNAME___. All rights reserved.
+-->
+<plist version="1.0">
+<dict>
+  <key>AppSecret</key>
+     <string>93ee26f7-ea18-4fc9-90e5-577d4d2f8d79</string>
+</dict>
+</plist>
