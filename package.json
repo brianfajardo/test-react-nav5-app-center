@@ -47,17 +47,6 @@
     "react-test-renderer": "16.13.1",
     "typescript": "^3.8.3"
   },
-  "jest": {
-    "preset": "react-native",
-    "moduleFileExtensions": [
-      "ts",
-      "tsx",
-      "js",
-      "jsx",
-      "json",
-      "node"
-    ]
-  },
   "lint-staged": {
     "index.js": [
       "eslint index.js --fix",
