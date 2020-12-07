@@ -23,7 +23,7 @@ const Tabs = createBottomTabNavigator<HomeTabsParamList>()
 export const HomeTabs: React.FC<Props> = () => {
   const screenOptions: HomeTabsScreenOptions = ({ route }) => ({
     tabBarIcon: ({ focused, color, size }) => {
-      let iconName
+      let iconName = 'bug'
 
       if (route.name === Routes.Home) {
         iconName = focused ? 'home' : 'home-outline'

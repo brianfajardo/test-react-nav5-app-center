@@ -36,6 +36,7 @@ module.exports = {
     '@typescript-eslint/no-empty-function': 'off',
     'react/display-name': 'off',
     'react/prop-types': 'off',
+    '@typescript-eslint/no-floating-promises': 'off',
   },
   settings: {
     react: {
