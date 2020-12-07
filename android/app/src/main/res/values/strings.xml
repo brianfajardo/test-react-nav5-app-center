@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">reactNavigation5</string>
+
+    <!-- App Center -->
+    <string name="appCenterCrashes_whenToSendCrashes" moduleConfig="true" translatable="false">ALWAYS_SEND</string>
+    <string name="appCenterAnalytics_whenToEnableAnalytics" moduleConfig="true" translatable="false">ALWAYS_SEND</string>
 </resources>
