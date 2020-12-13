@@ -1,13 +1,16 @@
-import { StackNavigationProp } from '@react-navigation/stack'
 import React, { useContext } from 'react'
-import { Button, Text } from 'react-native'
+import { StyleSheet, Text } from 'react-native'
 import Crashes from 'appcenter-crashes'
 import Analytics from 'appcenter-analytics'
+import { StackNavigationProp } from '@react-navigation/stack'
 import { AuthContext } from '../contexts/AuthProvider'
 import { CrashAnalyticsContext } from '../contexts/CrashAnalytics'
 import { Center } from '../components/Center'
 import { CrashAlertModal } from '../components/CrashAlertModal'
 import { AuthStackParamList, Routes } from '../types/navigation'
+import { ButtonBorderless } from '../components/ButtonBorderless'
+import { Button } from '../components/Button'
+import { Divider } from '../components/Divider'
 
 type Props = {
   navigation: StackNavigationProp<AuthStackParamList, Routes.Login>
@@ -19,7 +22,16 @@ export const LoginScreen: React.FC<Props> = ({ navigation }) => {
     CrashAnalyticsContext,
   )
 
-  const onRegisterScreenButtonPress = () => {
+  const onLoginButtonPress = () => {
+    login()
+
+    Analytics.trackEvent('button press', {
+      button: 'login',
+      onScreen: Routes.Login,
+    })
+  }
+
+  const onRegisterButtonPress = () => {
     navigation.navigate(Routes.Register)
 
     Analytics.trackEvent('button press', {
@@ -44,14 +56,21 @@ export const LoginScreen: React.FC<Props> = ({ navigation }) => {
         onConfirm={resetLastSessionCrashed}
       />
       <Center>
-        <Text>Login Screen</Text>
-        <Button title={Routes.Login} onPress={login} />
-        <Button
-          title="Navigate to Register screen"
-          onPress={onRegisterScreenButtonPress}
-        />
-        <Button title="Crash" onPress={onCrashButtonPress} />
+        <Text style={styles.title}>Login Screen</Text>
+        <Divider />
+        <ButtonBorderless title="Login" onPress={onLoginButtonPress} />
+        <Divider />
+        <ButtonBorderless title="Register" onPress={onRegisterButtonPress} />
+        <Divider />
+        <Button title="Test Crash" onPress={onCrashButtonPress} />
       </Center>
     </>
   )
 }
+
+const styles = StyleSheet.create({
+  title: {
+    fontSize: 16,
+    fontWeight: 'bold',
+  },
+})

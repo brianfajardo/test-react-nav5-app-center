@@ -1,5 +1,4 @@
 import React, { useContext } from 'react'
-import { Text, TouchableOpacity } from 'react-native'
 import {
   createStackNavigator,
   StackNavigationOptions,
@@ -9,6 +8,7 @@ import Analytics from 'appcenter-analytics'
 import { AuthContext } from '../../contexts/AuthProvider'
 import { FeedScreen } from '../../screens/FeedScreen'
 import { HomeStackParamList, Routes } from '../../types/navigation'
+import { ButtonBorderless } from '../../components/ButtonBorderless'
 
 const Stack = createStackNavigator<HomeStackParamList>()
 
@@ -26,15 +26,9 @@ export const HomeStack: React.FC = () => {
 
   const feedScreenOptions: StackNavigationOptions = {
     headerLeft: () => (
-      <TouchableOpacity onPress={onTestCrashButtonPress}>
-        <Text>Crash</Text>
-      </TouchableOpacity>
+      <ButtonBorderless title="Test Crash" onPress={onTestCrashButtonPress} />
     ),
-    headerRight: () => (
-      <TouchableOpacity onPress={logout}>
-        <Text>Logout</Text>
-      </TouchableOpacity>
-    ),
+    headerRight: () => <ButtonBorderless title="Logout" onPress={logout} />,
   }
 
   return (

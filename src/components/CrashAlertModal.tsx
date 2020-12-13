@@ -1,5 +1,6 @@
 import React from 'react'
-import { Modal, StyleSheet, Text, TouchableHighlight, View } from 'react-native'
+import { Modal, StyleSheet, Text, View } from 'react-native'
+import { Button } from './Button'
 import { Center } from './Center'
 
 type Props = {
@@ -14,10 +15,7 @@ export const CrashAlertModal: React.FC<Props> = ({ visible, onConfirm }) => {
         <View style={styles.modalContainer}>
           <Text style={styles.modalTitle}>You pressed the crash button</Text>
           <Text style={styles.modalMessage}>Forgive self?</Text>
-
-          <TouchableHighlight style={styles.modalButton} onPress={onConfirm}>
-            <Text style={styles.modalButtonText}>Yes</Text>
-          </TouchableHighlight>
+          <Button title="Yes" onPress={onConfirm} />
         </View>
       </Center>
     </Modal>
@@ -49,13 +47,6 @@ const styles = StyleSheet.create({
     fontSize: 12,
     marginBottom: 15,
     textAlign: 'center',
-  },
-  modalButton: {
-    backgroundColor: '#F194FF',
-    borderRadius: 20,
-    paddingVertical: 10,
-    paddingHorizontal: 30,
-    elevation: 2,
   },
   modalButtonText: {
     color: 'white',
