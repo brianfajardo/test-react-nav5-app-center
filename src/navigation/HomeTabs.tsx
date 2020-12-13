@@ -10,8 +10,6 @@ import {
 import { RouteProp } from '@react-navigation/native'
 import { Routes } from '../types'
 
-type Props = Record<string, never>
-
 type HomeTabsScreenOptions = ({
   route,
 }: {
@@ -20,7 +18,7 @@ type HomeTabsScreenOptions = ({
 
 const Tabs = createBottomTabNavigator<HomeTabsParamList>()
 
-export const HomeTabs: React.FC<Props> = () => {
+export const HomeTabs: React.FC = () => {
   const screenOptions: HomeTabsScreenOptions = ({ route }) => ({
     tabBarIcon: ({ focused, color, size }) => {
       let iconName = 'bug'

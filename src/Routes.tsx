@@ -5,9 +5,7 @@ import { AuthContext } from './contexts'
 import { Center } from './components'
 import { HomeTabs, AuthStack } from './navigation'
 
-type Props = Record<string, unknown>
-
-export const Routes: React.FC<Props> = () => {
+export const Routes: React.FC = () => {
   const { user, loading } = useContext(AuthContext)
 
   if (loading) {

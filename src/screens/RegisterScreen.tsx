@@ -1,23 +1,28 @@
 import React from 'react'
 import { Button, Text } from 'react-native'
 import { StackNavigationProp } from '@react-navigation/stack'
-import { RouteProp } from '@react-navigation/native'
+import Analytics from 'appcenter-analytics'
 import { Center } from '../components'
 import { AuthStackParamList, Routes } from '../types'
 
 type Props = {
   navigation: StackNavigationProp<AuthStackParamList, Routes.Register>
-  route: RouteProp<AuthStackParamList, Routes.Register>
 }
 
-export const RegisterScreen: React.FC<Props> = ({ navigation, route }) => {
+export const RegisterScreen: React.FC<Props> = ({ navigation }) => {
+  const onLoginButtonPress = () => {
+    navigation.navigate(Routes.Login)
+
+    Analytics.trackEvent('button press', {
+      button: 'login',
+      onScreen: Routes.Register,
+    })
+  }
+
   return (
     <Center>
-      <Text>{route.name} Screen</Text>
-      <Button
-        title="Navigate to Login"
-        onPress={() => navigation.navigate(Routes.Login)}
-      />
+      <Text>Register Screen</Text>
+      <Button title="Navigate to Login" onPress={onLoginButtonPress} />
     </Center>
   )
 }

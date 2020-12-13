@@ -6,11 +6,9 @@ import {
 import { AuthStackParamList, Routes } from '../types'
 import { LoginScreen, RegisterScreen } from '../screens'
 
-type Props = Record<string, never>
-
 const Stack = createStackNavigator<AuthStackParamList>()
 
-export const AuthStack: React.FC<Props> = () => {
+export const AuthStack: React.FC = () => {
   const screenOptions: StackNavigationOptions = {
     header: () => null,
   }

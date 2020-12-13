@@ -3,9 +3,7 @@ import React from 'react'
 import { Providers } from './src/Providers'
 import { Routes } from './src/Routes'
 
-type Props = Record<string, never>
-
-export const App: React.FC<Props> = () => (
+export const App: React.FC = () => (
   <Providers>
     <Routes />
   </Providers>

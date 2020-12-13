@@ -1,10 +1,11 @@
 import { StackNavigationProp } from '@react-navigation/stack'
 import React, { useContext } from 'react'
 import { Button, Text } from 'react-native'
+import Crashes from 'appcenter-crashes'
+import Analytics from 'appcenter-analytics'
 import { Center, CrashAlertModal } from '../components'
 import { AuthContext, CrashAnalyticsContext } from '../contexts'
 import { AuthStackParamList, Routes } from '../types'
-import Crashes from 'appcenter-crashes'
 
 type Props = {
   navigation: StackNavigationProp<AuthStackParamList, Routes.Login>
@@ -15,6 +16,24 @@ export const LoginScreen: React.FC<Props> = ({ navigation }) => {
   const { lastSessionCrashed, resetLastSessionCrashed } = useContext(
     CrashAnalyticsContext,
   )
+
+  const onRegisterScreenButtonPress = () => {
+    navigation.navigate(Routes.Register)
+
+    Analytics.trackEvent('button press', {
+      button: 'register',
+      onScreen: Routes.Login,
+    })
+  }
+
+  const onCrashButtonPress = () => {
+    Crashes.generateTestCrash()
+
+    Analytics.trackEvent('button press', {
+      button: 'crash',
+      onScreen: Routes.Login,
+    })
+  }
 
   return (
     <>
@@ -27,9 +46,9 @@ export const LoginScreen: React.FC<Props> = ({ navigation }) => {
         <Button title={Routes.Login} onPress={login} />
         <Button
           title="Navigate to Register screen"
-          onPress={() => navigation.navigate(Routes.Register)}
+          onPress={onRegisterScreenButtonPress}
         />
-        <Button title="Crash" onPress={() => Crashes.generateTestCrash()} />
+        <Button title="Crash" onPress={onCrashButtonPress} />
       </Center>
     </>
   )

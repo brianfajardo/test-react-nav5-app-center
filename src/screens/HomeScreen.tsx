@@ -1,20 +1,34 @@
 import React, { useContext } from 'react'
-import { RouteProp } from '@react-navigation/native'
 import { Button, Text } from 'react-native'
 import Crashes from 'appcenter-crashes'
+import Analytics from 'appcenter-analytics'
 import { Center, CrashAlertModal } from '../components'
-import { HomeTabsParamList, Routes } from '../types'
+import { Routes } from '../types'
 import { AuthContext, CrashAnalyticsContext } from '../contexts'
 
-type Props = {
-  route: RouteProp<HomeTabsParamList, Routes.Home>
-}
-
-export const HomeScreen: React.FC<Props> = ({ route }) => {
+export const HomeScreen: React.FC = () => {
   const { logout } = useContext(AuthContext)
   const { lastSessionCrashed, resetLastSessionCrashed } = useContext(
     CrashAnalyticsContext,
   )
+
+  const onLogoutButtonPress = () => {
+    logout()
+
+    Analytics.trackEvent('button press', {
+      button: 'logout',
+      onScreen: Routes.Home,
+    })
+  }
+
+  const onCrashButtonPress = () => {
+    Crashes.generateTestCrash()
+
+    Analytics.trackEvent('button press', {
+      button: 'crash',
+      onScreen: Routes.Home,
+    })
+  }
 
   return (
     <>
@@ -23,9 +37,9 @@ export const HomeScreen: React.FC<Props> = ({ route }) => {
         onConfirm={resetLastSessionCrashed}
       />
       <Center>
-        <Text>{route.name} Screen</Text>
-        <Button title="Logout" onPress={logout} />
-        <Button title="Crash" onPress={() => Crashes.generateTestCrash()} />
+        <Text>Home Screen</Text>
+        <Button title="Logout" onPress={onLogoutButtonPress} />
+        <Button title="Crash" onPress={onCrashButtonPress} />
       </Center>
     </>
   )
