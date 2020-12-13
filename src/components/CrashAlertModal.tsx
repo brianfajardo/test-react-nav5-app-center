@@ -1,6 +1,6 @@
 import React from 'react'
 import { Modal, StyleSheet, Text, TouchableHighlight, View } from 'react-native'
-import { Center } from '.'
+import { Center } from './Center'
 
 type Props = {
   visible: boolean

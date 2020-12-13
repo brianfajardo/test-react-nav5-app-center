@@ -2,8 +2,8 @@ import React from 'react'
 import { Button, Text } from 'react-native'
 import { StackNavigationProp } from '@react-navigation/stack'
 import Analytics from 'appcenter-analytics'
-import { Center } from '../components'
-import { AuthStackParamList, Routes } from '../types'
+import { Center } from '../components/Center'
+import { AuthStackParamList, Routes } from '../types/navigation'
 
 type Props = {
   navigation: StackNavigationProp<AuthStackParamList, Routes.Register>

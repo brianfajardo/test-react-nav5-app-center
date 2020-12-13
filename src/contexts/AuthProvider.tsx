@@ -1,6 +1,6 @@
 import React, { ReactNode, useEffect, useState } from 'react'
-import { localStorage } from '../modules'
-import { LSKeys } from '../types'
+import localStorage from '../modules/localStorage'
+import { LSKeys } from '../types/localStorage'
 
 type Props = {
   children: ReactNode

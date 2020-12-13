@@ -1,14 +1,14 @@
 import React from 'react'
 import Ionicons from 'react-native-vector-icons/Ionicons'
-import { HomeScreen, SearchScreen } from '../screens'
-import { HomeTabsParamList } from '../types'
+import { RouteProp } from '@react-navigation/native'
 import {
   BottomTabBarOptions,
   BottomTabNavigationOptions,
   createBottomTabNavigator,
 } from '@react-navigation/bottom-tabs'
-import { RouteProp } from '@react-navigation/native'
-import { Routes } from '../types'
+import { HomeStack } from '../stacks/HomeStack'
+import { SearchScreen } from '../../screens/SearchScreen'
+import { HomeTabsParamList, Routes } from '../../types/navigation'
 
 type HomeTabsScreenOptions = ({
   route,
@@ -40,7 +40,7 @@ export const HomeTabs: React.FC = () => {
 
   return (
     <Tabs.Navigator screenOptions={screenOptions} tabBarOptions={tabBarOptions}>
-      <Tabs.Screen name={Routes.Home} component={HomeScreen} />
+      <Tabs.Screen name={Routes.Home} component={HomeStack} />
       <Tabs.Screen name={Routes.Search} component={SearchScreen} />
     </Tabs.Navigator>
   )

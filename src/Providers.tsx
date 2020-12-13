@@ -1,5 +1,6 @@
 import React, { ReactNode } from 'react'
-import { CrashAnalyticsProvider, AuthProvider } from './contexts'
+import { AuthProvider } from './contexts/AuthProvider'
+import { CrashAnalyticsProvider } from './contexts/CrashAnalytics'
 
 type Props = {
   children: ReactNode

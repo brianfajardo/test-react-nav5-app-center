@@ -3,9 +3,11 @@ import React, { useContext } from 'react'
 import { Button, Text } from 'react-native'
 import Crashes from 'appcenter-crashes'
 import Analytics from 'appcenter-analytics'
-import { Center, CrashAlertModal } from '../components'
-import { AuthContext, CrashAnalyticsContext } from '../contexts'
-import { AuthStackParamList, Routes } from '../types'
+import { AuthContext } from '../contexts/AuthProvider'
+import { CrashAnalyticsContext } from '../contexts/CrashAnalytics'
+import { Center } from '../components/Center'
+import { CrashAlertModal } from '../components/CrashAlertModal'
+import { AuthStackParamList, Routes } from '../types/navigation'
 
 type Props = {
   navigation: StackNavigationProp<AuthStackParamList, Routes.Login>

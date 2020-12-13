@@ -1,5 +1,5 @@
 import AsyncStorage from '@react-native-community/async-storage'
-import { LSKeys } from '../types'
+import { LSKeys } from '../types/localStorage'
 
 export default {
   set: async (key: LSKeys, value: any): Promise<void> => {
