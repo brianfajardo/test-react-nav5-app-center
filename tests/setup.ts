@@ -15,3 +15,8 @@ jest.mock('react-native-reanimated', () => {
 
   return Reanimated
 })
+
+jest.mock('appcenter-crashes', () => ({
+  generateTestCrash: jest.fn(),
+  lastSessionCrashReport: jest.fn(),
+}))

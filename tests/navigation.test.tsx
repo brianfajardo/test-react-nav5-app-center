@@ -29,7 +29,7 @@ describe('Navigation', () => {
 
       await waitForElementToBeRemoved(() => screen.getByText(loadingMsg))
 
-      expect(screen.getByText('Home Screen')).toBeDefined()
+      expect(screen.getByText('Friends')).toBeDefined()
     })
   })
 })
