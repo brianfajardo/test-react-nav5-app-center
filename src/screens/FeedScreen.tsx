@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React, { useContext, useMemo } from 'react'
 import faker from 'faker'
 import { CrashAnalyticsContext } from '../contexts/CrashAnalytics'
 import { CrashAlertModal } from '../components/CrashAlertModal'
@@ -8,14 +8,15 @@ import { Button } from '../components/Button'
 
 const FLATLIST_ROW_HEIGHT = 42
 
+const getFakeData = () =>
+  Array.from(Array(1000), () => faker.helpers.userCard())
+
 export const FeedScreen: React.FC = () => {
   const { lastSessionCrashed, resetLastSessionCrashed } = useContext(
     CrashAnalyticsContext,
   )
 
-  const flatListFakeData: Faker.UserCard[] = Array.from(Array(1000), () =>
-    faker.helpers.userCard(),
-  )
+  const flatListFakeData: Faker.UserCard[] = useMemo(getFakeData, [])
 
   const flatListKeyExtractor = (user: Faker.UserCard, idx: number) =>
     `${idx}-${user.username}`
