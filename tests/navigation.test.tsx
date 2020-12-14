@@ -3,7 +3,7 @@ import {
   render,
   waitForElementToBeRemoved,
 } from '@testing-library/react-native'
-import { App } from '../App'
+import { App } from '../src/App'
 import AsyncStorage from '@react-native-community/async-storage'
 
 describe('Navigation', () => {

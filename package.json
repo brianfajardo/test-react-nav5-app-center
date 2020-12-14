@@ -7,8 +7,8 @@
     "ios": "react-native run-ios",
     "start": "react-native start",
     "test": "jest",
-    "lint": "eslint index.js App.tsx 'src/**/*' --ext .js,.ts.tsx --fix",
-    "format": "prettier index.js App.tsx 'src/**/*' --check"
+    "lint": "eslint index.js 'src/**/*' --ext .js,.ts.tsx --fix",
+    "format": "prettier index.js 'src/**/*' --check"
   },
   "dependencies": {
     "@react-native-community/async-storage": "^1.12.1",
@@ -56,10 +56,6 @@
     "index.js": [
       "eslint index.js --fix",
       "prettier index.js --write"
-    ],
-    "App.tsx": [
-      "eslint App.tsx --fix",
-      "prettier App.tsx --write"
     ],
     "src/**/*.{ts,tsx}": [
       "eslint 'src/**/*' --ext .ts,.tsx --fix",
