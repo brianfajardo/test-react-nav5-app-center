@@ -1,5 +1,5 @@
 export enum Routes {
-  Feed = 'Feed',
+  Friends = 'Friends',
   Home = 'Home',
   Login = 'Login',
   Register = 'Register',
@@ -12,7 +12,7 @@ export type AuthStackParamList = {
 }
 
 export type HomeStackParamList = {
-  [Routes.Feed]: undefined
+  [Routes.Friends]: undefined
 }
 
 export type HomeTabsParamList = {

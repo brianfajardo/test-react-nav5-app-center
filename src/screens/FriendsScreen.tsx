@@ -8,20 +8,20 @@ import { Button } from '../components/Button'
 
 const FLATLIST_ROW_HEIGHT = 42
 
-const getFakeData = () =>
+const getFakeUserData = () =>
   Array.from(Array(1000), () => faker.helpers.userCard())
 
-export const FeedScreen: React.FC = () => {
+export const FriendsScreen: React.FC = () => {
   const { lastSessionCrashed, resetLastSessionCrashed } = useContext(
     CrashAnalyticsContext,
   )
 
-  const flatListFakeData: Faker.UserCard[] = useMemo(getFakeData, [])
+  const flatListFakeData: Faker.UserCard[] = useMemo(getFakeUserData, [])
 
   const flatListKeyExtractor = (user: Faker.UserCard, idx: number) =>
     `${idx}-${user.username}`
 
-  const flatListGetItemLayout = (_data, idx: number) => ({
+  const flatListGetItemLayout = (_data: any, idx: number) => ({
     length: FLATLIST_ROW_HEIGHT,
     offset: FLATLIST_ROW_HEIGHT * idx,
     index: idx,
