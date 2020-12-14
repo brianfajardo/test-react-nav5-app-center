@@ -1,21 +1,21 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { Modal, StyleSheet, Text, View } from 'react-native'
+import { CrashAnalyticsContext } from '../contexts/CrashAnalytics'
 import { Button } from './Button'
 import { Center } from './Center'
 
-type Props = {
-  visible: boolean
-  onConfirm: () => void
-}
+export const CrashAlertModal: React.FC = () => {
+  const { lastSessionCrashed, resetLastSessionCrashed } = useContext(
+    CrashAnalyticsContext,
+  )
 
-export const CrashAlertModal: React.FC<Props> = ({ visible, onConfirm }) => {
   return (
-    <Modal animationType="fade" transparent={true} visible={visible}>
+    <Modal animationType="fade" transparent={true} visible={lastSessionCrashed}>
       <Center>
         <View style={styles.modalContainer}>
           <Text style={styles.modalTitle}>You pressed the crash button</Text>
           <Text style={styles.modalMessage}>Forgive self?</Text>
-          <Button title="Yes" onPress={onConfirm} />
+          <Button title="Yes" onPress={resetLastSessionCrashed} />
         </View>
       </Center>
     </Modal>

@@ -1,22 +1,19 @@
 import React, { useContext } from 'react'
-import { StyleSheet } from 'react-native'
-import {
-  createStackNavigator,
-  StackNavigationOptions,
-} from '@react-navigation/stack'
+import { createStackNavigator } from '@react-navigation/stack'
 import Crashes from 'appcenter-crashes'
 import Analytics from 'appcenter-analytics'
 import { AuthContext } from '../../contexts/AuthProvider'
 import { FriendsScreen } from '../../screens/FriendsScreen'
-import { ButtonBorderless } from '../../components/ButtonBorderless'
 import { HomeStackParamList, Routes } from '../../types/navigation'
+import { FriendScreen } from '../../screens/FriendScreen'
+import { getFriendsScreenOptions } from '../options/friendsScreenOptions'
 
 const Stack = createStackNavigator<HomeStackParamList>()
 
 export const HomeStack: React.FC = () => {
   const { logout } = useContext(AuthContext)
 
-  const onTestCrashButtonPress = () => {
+  const testCrash = () => {
     Crashes.generateTestCrash()
 
     Analytics.trackEvent('button press', {
@@ -25,28 +22,10 @@ export const HomeStack: React.FC = () => {
     })
   }
 
-  const friendsScreenHeaderLeft: StackNavigationOptions = {
-    headerLeft: () => (
-      <ButtonBorderless title="Test crash" onPress={onTestCrashButtonPress} />
-    ),
-    headerLeftContainerStyle: styles.headerLeftContainer,
-  }
-
-  const friendsScreenHeaderRight: StackNavigationOptions = {
-    headerRight: () => (
-      <ButtonBorderless
-        title="Logout"
-        onPress={logout}
-        textStyle={styles.headerLeftText}
-      />
-    ),
-    headerRightContainerStyle: styles.headerRightContainer,
-  }
-
-  const friendsScreenOptions = {
-    ...friendsScreenHeaderLeft,
-    ...friendsScreenHeaderRight,
-  }
+  const friendsScreenOptions = getFriendsScreenOptions({
+    onHeaderLeftPress: testCrash,
+    onHeaderRightPress: logout,
+  })
 
   return (
     <Stack.Navigator initialRouteName={Routes.Friends}>
@@ -55,18 +34,13 @@ export const HomeStack: React.FC = () => {
         component={FriendsScreen}
         options={friendsScreenOptions}
       />
+      <Stack.Screen
+        name={Routes.Friend}
+        component={FriendScreen}
+        options={({ route }) => ({
+          headerTitle: route.params.name,
+        })}
+      />
     </Stack.Navigator>
   )
 }
-
-const styles = StyleSheet.create({
-  headerLeftContainer: {
-    paddingLeft: 8,
-  },
-  headerRightContainer: {
-    paddingRight: 8,
-  },
-  headerLeftText: {
-    color: 'red',
-  },
-})

@@ -4,7 +4,6 @@ import Crashes from 'appcenter-crashes'
 import Analytics from 'appcenter-analytics'
 import { StackNavigationProp } from '@react-navigation/stack'
 import { AuthContext } from '../contexts/AuthProvider'
-import { CrashAnalyticsContext } from '../contexts/CrashAnalytics'
 import { Center } from '../components/Center'
 import { CrashAlertModal } from '../components/CrashAlertModal'
 import { AuthStackParamList, Routes } from '../types/navigation'
@@ -18,9 +17,6 @@ type Props = {
 
 export const LoginScreen: React.FC<Props> = ({ navigation }) => {
   const { login } = useContext(AuthContext)
-  const { lastSessionCrashed, resetLastSessionCrashed } = useContext(
-    CrashAnalyticsContext,
-  )
 
   const onLoginButtonPress = () => {
     login()
@@ -51,10 +47,7 @@ export const LoginScreen: React.FC<Props> = ({ navigation }) => {
 
   return (
     <>
-      <CrashAlertModal
-        visible={lastSessionCrashed}
-        onConfirm={resetLastSessionCrashed}
-      />
+      <CrashAlertModal />
       <Center>
         <Text style={styles.title}>Login Screen</Text>
         <Divider />

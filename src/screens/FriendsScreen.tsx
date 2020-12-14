@@ -1,64 +1,28 @@
-import React, { useContext, useMemo } from 'react'
+import React, { useCallback, useMemo } from 'react'
 import faker from 'faker'
-import { CrashAnalyticsContext } from '../contexts/CrashAnalytics'
+import { StackNavigationProp } from '@react-navigation/stack'
 import { CrashAlertModal } from '../components/CrashAlertModal'
-import { FlatList } from 'react-native-gesture-handler'
-import { StyleSheet } from 'react-native'
-import { Button } from '../components/Button'
+import { FriendsList } from '../components/FriendsList'
+import { HomeStackParamList, Routes } from '../types/navigation'
 
-const FLATLIST_ROW_HEIGHT = 42
+type Props = {
+  navigation: StackNavigationProp<HomeStackParamList, Routes.Friends>
+}
 
-const getFakeUserData = () =>
-  Array.from(Array(1000), () => faker.helpers.userCard())
+const getFakeUserData = (): Faker.UserCard[] =>
+  Array.from(Array(150), () => faker.helpers.userCard())
 
-export const FriendsScreen: React.FC = () => {
-  const { lastSessionCrashed, resetLastSessionCrashed } = useContext(
-    CrashAnalyticsContext,
-  )
+export const FriendsScreen: React.FC<Props> = ({ navigation }) => {
+  const fakeData = useMemo(getFakeUserData, [])
 
-  const flatListFakeData: Faker.UserCard[] = useMemo(getFakeUserData, [])
-
-  const flatListKeyExtractor = (user: Faker.UserCard, idx: number) =>
-    `${idx}-${user.username}`
-
-  const flatListGetItemLayout = (_data: any, idx: number) => ({
-    length: FLATLIST_ROW_HEIGHT,
-    offset: FLATLIST_ROW_HEIGHT * idx,
-    index: idx,
-  })
-
-  const flatListRenderItem = ({ item }: { item: Faker.UserCard }) => (
-    <Button
-      title={item.name}
-      onPress={() => console.log('press')}
-      style={styles.flatListRow}
-    />
-  )
+  const onFriendRowPress = useCallback((friend: Faker.UserCard) => {
+    navigation.navigate(Routes.Friend, { name: friend.name })
+  }, [])
 
   return (
     <>
-      <CrashAlertModal
-        visible={lastSessionCrashed}
-        onConfirm={resetLastSessionCrashed}
-      />
-      <FlatList
-        data={flatListFakeData}
-        initialNumToRender={18}
-        getItemLayout={flatListGetItemLayout}
-        keyExtractor={flatListKeyExtractor}
-        maxToRenderPerBatch={15}
-        renderItem={flatListRenderItem}
-        removeClippedSubviews={true}
-        style={styles.flatList}
-        windowSize={3}
-      />
+      <CrashAlertModal />
+      <FriendsList data={fakeData} onRowPress={onFriendRowPress} />
     </>
   )
 }
-
-const styles = StyleSheet.create({
-  flatList: {
-    width: '100%',
-  },
-  flatListRow: { height: FLATLIST_ROW_HEIGHT, flex: 1, borderRadius: 0 },
-})
