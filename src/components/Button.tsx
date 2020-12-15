@@ -1,11 +1,14 @@
 import React from 'react'
-import { StyleProp, StyleSheet, Text, ViewStyle } from 'react-native'
-import { RectButton } from 'react-native-gesture-handler'
+import {
+  StyleProp,
+  StyleSheet,
+  Text,
+  ViewStyle,
+  TouchableHighlight,
+} from 'react-native'
 
 type Props = {
-  androidRippleColour?: string
-  iosActiveOpacity?: number
-  iosExclusive?: boolean
+  activeOpacity?: number
   onPress: () => void
   style?: StyleProp<ViewStyle>
   title: string
@@ -13,24 +16,20 @@ type Props = {
 }
 
 export const Button: React.FC<Props> = ({
-  androidRippleColour,
-  iosActiveOpacity,
-  iosExclusive,
+  activeOpacity,
   onPress,
   style,
   title,
   underlayColor,
 }) => (
-  <RectButton
-    activeOpacity={iosActiveOpacity}
-    exclusive={iosExclusive}
+  <TouchableHighlight
+    activeOpacity={activeOpacity}
     onPress={onPress}
-    rippleColor={androidRippleColour}
     style={[styles.button, style]}
     underlayColor={underlayColor}
   >
     <Text style={styles.text}>{title}</Text>
-  </RectButton>
+  </TouchableHighlight>
 )
 
 const styles = StyleSheet.create({
