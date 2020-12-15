@@ -1,4 +1,5 @@
 import React from 'react'
+import { Platform } from 'react-native'
 import Ionicons from 'react-native-vector-icons/Ionicons'
 import { RouteProp } from '@react-navigation/native'
 import {
@@ -36,6 +37,9 @@ export const HomeTabs: React.FC = () => {
   const tabBarOptions: BottomTabBarOptions = {
     activeTintColor: '#444444',
     inactiveTintColor: 'gray',
+    tabStyle: {
+      padding: Platform.select({ ios: 0, android: 2 }),
+    },
   }
 
   return (
