@@ -8,7 +8,7 @@ type Props = {
   onRowPress: (friend: Faker.UserCard) => void
 }
 
-const FLATLIST_ROW_HEIGHT = 42
+const FLATLIST_ROW_HEIGHT = 65
 
 export const FriendsList: React.FC<Props> = ({ data, onRowPress }) => {
   const flatListKeyExtractor = (user: Faker.UserCard, idx: number) =>
@@ -31,14 +31,15 @@ export const FriendsList: React.FC<Props> = ({ data, onRowPress }) => {
   return (
     <FlatList
       data={data}
-      initialNumToRender={18}
+      initialNumToRender={10}
       getItemLayout={flatListGetItemLayout}
       keyExtractor={flatListKeyExtractor}
-      maxToRenderPerBatch={15}
+      maxToRenderPerBatch={10}
       renderItem={flatListRenderItem}
       removeClippedSubviews={true}
       style={styles.flatList}
-      windowSize={3}
+      updateCellsBatchingPeriod={50}
+      windowSize={21}
     />
   )
 }
