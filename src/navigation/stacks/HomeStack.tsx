@@ -6,7 +6,8 @@ import { AuthContext } from '../../contexts/AuthProvider'
 import { FriendsScreen } from '../../screens/FriendsScreen'
 import { HomeStackParamList, Routes } from '../../types/navigation'
 import { FriendScreen } from '../../screens/FriendScreen'
-import { getFriendsScreenOptions } from '../options/friendsScreenOptions'
+import { ButtonBorderless } from '../../components/ButtonBorderless'
+import { StyleSheet } from 'react-native'
 
 const Stack = createStackNavigator<HomeStackParamList>()
 
@@ -22,13 +23,26 @@ export const HomeStack: React.FC = () => {
     })
   }
 
-  const friendsScreenOptions = getFriendsScreenOptions({
-    onHeaderLeftPress: testCrash,
-    onHeaderRightPress: logout,
-  })
+  const friendsScreenOptions = {
+    headerLeft: () => (
+      <ButtonBorderless title="Test crash" onPress={testCrash} />
+    ),
+    headerRight: () => (
+      <ButtonBorderless
+        title="Logout"
+        onPress={logout}
+        textStyle={styles.friendsHeaderRightText}
+      />
+    ),
+    headerLeftContainerStyle: styles.friendsHeaderLeftContainer,
+    headerRightContainerStyle: styles.friendsHeaderRightContainer,
+  }
 
   return (
-    <Stack.Navigator initialRouteName={Routes.Friends}>
+    <Stack.Navigator
+      initialRouteName={Routes.Friends}
+      screenOptions={{ headerTitleAlign: 'center' }}
+    >
       <Stack.Screen
         name={Routes.Friends}
         component={FriendsScreen}
@@ -44,3 +58,15 @@ export const HomeStack: React.FC = () => {
     </Stack.Navigator>
   )
 }
+
+const styles = StyleSheet.create({
+  friendsHeaderLeftContainer: {
+    paddingLeft: 8,
+  },
+  friendsHeaderRightContainer: {
+    paddingRight: 8,
+  },
+  friendsHeaderRightText: {
+    color: 'red',
+  },
+})
