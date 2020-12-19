@@ -8,7 +8,8 @@
     "start": "react-native start",
     "test": "jest",
     "lint": "eslint index.js 'src/**/*' --ext .js,.ts.tsx --fix",
-    "format": "prettier index.js 'src/**/*' --check"
+    "format": "prettier index.js 'src/**/*' --check",
+    "watch": "tsc --watch"
   },
   "dependencies": {
     "@react-native-community/async-storage": "^1.12.1",
