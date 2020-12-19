@@ -10,14 +10,14 @@ import { RegisterScreen } from '../../screens/RegisterScreen'
 const Stack = createStackNavigator<AuthStackParamList>()
 
 export const AuthStack: React.FC = () => {
-  const screenOptions: StackNavigationOptions = {
+  const defaultScreenOptions: StackNavigationOptions = {
     header: () => null,
   }
 
   return (
     <Stack.Navigator
       initialRouteName={Routes.Login}
-      screenOptions={screenOptions}
+      screenOptions={defaultScreenOptions}
     >
       <Stack.Screen name={Routes.Login} component={LoginScreen} />
       <Stack.Screen name={Routes.Register} component={RegisterScreen} />
