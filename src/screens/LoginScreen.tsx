@@ -49,7 +49,7 @@ export const LoginScreen: React.FC<Props> = ({ navigation }) => {
     <>
       <CrashAlertModal />
       <Center>
-        <Text style={styles.title}>Login Screen</Text>
+        <Text style={styles.title}>🎉 Welcome 🎉</Text>
         <Divider />
         <ButtonBorderless title="Login" onPress={onLoginButtonPress} />
         <Divider />

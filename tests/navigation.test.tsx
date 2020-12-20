@@ -1,7 +1,7 @@
 import React from 'react'
 import { render, cleanup, fireEvent } from '@testing-library/react-native'
 import { AppNavigator } from '../src/AppNavigator'
-import { AuthContext } from '../src/contexts/AuthProvider'
+import { AuthContext, AuthProvider } from '../src/contexts/AuthProvider'
 import { NavigationContainer } from '@react-navigation/native'
 
 afterEach(cleanup)
@@ -23,7 +23,7 @@ describe('Navigation', () => {
       )
 
       const screen = render(<AppNavigator />, { wrapper })
-      const loginScreenTitle = await screen.findByText('Login Screen')
+      const loginScreenTitle = await screen.findByText('🎉 Welcome 🎉')
 
       expect(loginScreenTitle).toBeTruthy()
     })
@@ -45,7 +45,7 @@ describe('Navigation', () => {
       const screen = render(<AppNavigator />, { wrapper })
       const friendsScreenTitle = await screen.findByText('Friends')
 
-      expect(friendsScreenTitle).toBeDefined()
+      expect(friendsScreenTitle).toBeTruthy()
     })
   })
 
@@ -98,6 +98,55 @@ describe('Navigation', () => {
 
       expect(searchTab).toBeTruthy()
       expect(searchScreenTitle).toBeTruthy()
+    })
+  })
+
+  describe('screens', () => {
+    describe('Login', () => {
+      it('should navigate to Friends screen when the login button is pressed', async () => {
+        const wrapper = ({ children }) => (
+          <AuthProvider>
+            <NavigationContainer>{children}</NavigationContainer>
+          </AuthProvider>
+        )
+
+        const screen = render(<AppNavigator />, { wrapper })
+
+        const loginButton = await screen.findByText('Login')
+
+        fireEvent(loginButton, 'press')
+
+        const friendsScreenTitle = await screen.findByText('Friends')
+
+        expect(loginButton).toBeTruthy()
+        expect(friendsScreenTitle).toBeTruthy()
+      })
+
+      it('should navigate to Register screen when the register button is pressed', async () => {
+        const providerProps = {
+          loading: false,
+          user: null,
+          login: () => {},
+          logout: () => {},
+        }
+
+        const wrapper = ({ children }) => (
+          <AuthContext.Provider value={providerProps}>
+            <NavigationContainer>{children}</NavigationContainer>
+          </AuthContext.Provider>
+        )
+
+        const screen = render(<AppNavigator />, { wrapper })
+
+        const registerButton = await screen.findByText('Register')
+
+        fireEvent(registerButton, 'press')
+
+        const registerScreenTitle = await screen.findByText('Register Screen')
+
+        expect(registerButton).toBeTruthy()
+        expect(registerScreenTitle).toBeTruthy()
+      })
     })
   })
 })
