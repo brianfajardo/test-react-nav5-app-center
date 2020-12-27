@@ -20,3 +20,7 @@ jest.mock('appcenter-crashes', () => ({
   generateTestCrash: jest.fn(),
   lastSessionCrashReport: jest.fn(),
 }))
+
+jest.mock('appcenter-analytics', () => ({
+  trackEvent: jest.fn(),
+}))

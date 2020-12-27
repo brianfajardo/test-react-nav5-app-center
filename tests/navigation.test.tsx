@@ -1,35 +1,152 @@
 import React from 'react'
-import {
-  render,
-  waitForElementToBeRemoved,
-} from '@testing-library/react-native'
-import { App } from '../src/App'
-import AsyncStorage from '@react-native-community/async-storage'
+import { render, cleanup, fireEvent } from '@testing-library/react-native'
+import { AppNavigator } from '../src/AppNavigator'
+import { AuthContext, AuthProvider } from '../src/contexts/AuthProvider'
+import { NavigationContainer } from '@react-navigation/native'
+
+afterEach(cleanup)
 
 describe('Navigation', () => {
   describe('auth', () => {
-    beforeEach(async () => await AsyncStorage.clear())
+    it('should navigate to Login screen if the user is not authenticated', async () => {
+      const providerProps = {
+        loading: false,
+        user: null,
+        login: () => {},
+        logout: () => {},
+      }
 
-    const loadingMsg = 'One sec, making sure you exist.'
+      const wrapper = ({ children }) => (
+        <AuthContext.Provider value={providerProps}>
+          <NavigationContainer>{children}</NavigationContainer>
+        </AuthContext.Provider>
+      )
 
-    it('should render the Login screen if the user is not authenticated', async () => {
-      const screen = render(<App />)
+      const screen = render(<AppNavigator />, { wrapper })
+      const loginScreenTitle = await screen.findByText('🎉 Welcome 🎉')
 
-      await waitForElementToBeRemoved(() => screen.getByText(loadingMsg))
-
-      expect(screen.getByText('Login Screen')).toBeDefined()
+      expect(loginScreenTitle).toBeTruthy()
     })
 
-    it('should render the Home screen if the user is authenticated', async () => {
-      //  FIXME: Adding await causes console error to appear:
-      //  "Warning: You called act(async () => ...) without await."
-      AsyncStorage.setItem('user', JSON.stringify({ username: 'Santa' }))
+    it('should navigate to Friends screen if the user is authenticated', async () => {
+      const providerProps = {
+        loading: false,
+        user: { username: 'Santa' },
+        login: () => {},
+        logout: () => {},
+      }
 
-      const screen = render(<App />)
+      const wrapper = ({ children }) => (
+        <AuthContext.Provider value={providerProps}>
+          <NavigationContainer>{children}</NavigationContainer>
+        </AuthContext.Provider>
+      )
 
-      await waitForElementToBeRemoved(() => screen.getByText(loadingMsg))
+      const screen = render(<AppNavigator />, { wrapper })
+      const friendsScreenTitle = await screen.findByText('Friends')
 
-      expect(screen.getByText('Friends')).toBeDefined()
+      expect(friendsScreenTitle).toBeTruthy()
+    })
+  })
+
+  describe('bottom tabs', () => {
+    it('should navigate to Friends screen when the home tab is pressed', async () => {
+      const providerProps = {
+        loading: false,
+        user: { username: 'Santa' },
+        login: () => {},
+        logout: () => {},
+      }
+
+      const wrapper = ({ children }) => (
+        <AuthContext.Provider value={providerProps}>
+          <NavigationContainer>{children}</NavigationContainer>
+        </AuthContext.Provider>
+      )
+
+      const screen = render(<AppNavigator />, { wrapper })
+      const homeTab = await screen.findByText('Home')
+
+      fireEvent(homeTab, 'press')
+
+      const friendsScreenTitle = screen.getByText('Friends')
+
+      expect(homeTab).toBeTruthy()
+      expect(friendsScreenTitle).toBeTruthy()
+    })
+
+    it('should navigate to Search screen when the search tab is pressed', async () => {
+      const providerProps = {
+        loading: false,
+        user: { username: 'Santa' },
+        login: () => {},
+        logout: () => {},
+      }
+
+      const wrapper = ({ children }) => (
+        <AuthContext.Provider value={providerProps}>
+          <NavigationContainer>{children}</NavigationContainer>
+        </AuthContext.Provider>
+      )
+
+      const screen = render(<AppNavigator />, { wrapper })
+      const searchTab = await screen.findByText('Search')
+
+      fireEvent(searchTab, 'press')
+
+      const searchScreenTitle = screen.getByText('Search Screen')
+
+      expect(searchTab).toBeTruthy()
+      expect(searchScreenTitle).toBeTruthy()
+    })
+  })
+
+  describe('screens', () => {
+    describe('Login', () => {
+      it('should navigate to Friends screen when the login button is pressed', async () => {
+        const wrapper = ({ children }) => (
+          <AuthProvider>
+            <NavigationContainer>{children}</NavigationContainer>
+          </AuthProvider>
+        )
+
+        const screen = render(<AppNavigator />, { wrapper })
+
+        const loginButton = await screen.findByText('Login')
+
+        fireEvent(loginButton, 'press')
+
+        const friendsScreenTitle = await screen.findByText('Friends')
+
+        expect(loginButton).toBeTruthy()
+        expect(friendsScreenTitle).toBeTruthy()
+      })
+
+      it('should navigate to Register screen when the register button is pressed', async () => {
+        const providerProps = {
+          loading: false,
+          user: null,
+          login: () => {},
+          logout: () => {},
+        }
+
+        const wrapper = ({ children }) => (
+          <AuthContext.Provider value={providerProps}>
+            <NavigationContainer>{children}</NavigationContainer>
+          </AuthContext.Provider>
+        )
+
+        const screen = render(<AppNavigator />, { wrapper })
+
+        const registerButton = await screen.findByText('Register')
+
+        fireEvent(registerButton, 'press')
+
+        const registerScreenTitle = await screen.findByText('Register Screen')
+
+        expect(registerButton).toBeTruthy()
+        expect(registerScreenTitle).toBeTruthy()
+      })
     })
   })
 })

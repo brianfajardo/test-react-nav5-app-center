@@ -1,7 +1,7 @@
 import React from 'react'
 import { Platform } from 'react-native'
 import Ionicons from 'react-native-vector-icons/Ionicons'
-import { RouteProp } from '@react-navigation/native'
+import { Route } from '@react-navigation/native'
 import {
   BottomTabBarOptions,
   BottomTabNavigationOptions,
@@ -11,16 +11,14 @@ import { HomeStack } from '../stacks/HomeStack'
 import { SearchScreen } from '../../screens/SearchScreen'
 import { HomeTabsParamList, Routes } from '../../types/navigation'
 
-type HomeTabsScreenOptions = ({
-  route,
-}: {
-  route: RouteProp<HomeTabsParamList, Routes.Home>
-}) => BottomTabNavigationOptions
-
 const Tabs = createBottomTabNavigator<HomeTabsParamList>()
 
+type DefaultScreenOptions = (props: {
+  route: Route<Routes.Home | Routes.Search>
+}) => BottomTabNavigationOptions
+
 export const HomeTabs: React.FC = () => {
-  const screenOptions: HomeTabsScreenOptions = ({ route }) => ({
+  const defaultScreenOptions: DefaultScreenOptions = ({ route }) => ({
     tabBarIcon: ({ focused, color, size }) => {
       let iconName = 'bug'
 
@@ -34,7 +32,7 @@ export const HomeTabs: React.FC = () => {
     },
   })
 
-  const tabBarOptions: BottomTabBarOptions = {
+  const defaultTabBarOptions: BottomTabBarOptions = {
     activeTintColor: '#444444',
     inactiveTintColor: 'gray',
     tabStyle: {
@@ -43,7 +41,10 @@ export const HomeTabs: React.FC = () => {
   }
 
   return (
-    <Tabs.Navigator screenOptions={screenOptions} tabBarOptions={tabBarOptions}>
+    <Tabs.Navigator
+      screenOptions={defaultScreenOptions}
+      tabBarOptions={defaultTabBarOptions}
+    >
       <Tabs.Screen name={Routes.Home} component={HomeStack} />
       <Tabs.Screen name={Routes.Search} component={SearchScreen} />
     </Tabs.Navigator>
