@@ -1,12 +1,11 @@
 import React, { useContext } from 'react'
 import { ActivityIndicator, Text } from 'react-native'
-import { NavigationContainer } from '@react-navigation/native'
 import { AuthContext } from './contexts/AuthProvider'
 import { AuthStack } from './navigation/stacks/AuthStack'
 import { HomeTabs } from './navigation/tabs/HomeTabs'
 import { Center } from './components/Center'
 
-export const Routes: React.FC = () => {
+export const AppNavigator: React.FC = () => {
   const { user, loading } = useContext(AuthContext)
 
   if (loading) {
@@ -18,9 +17,5 @@ export const Routes: React.FC = () => {
     )
   }
 
-  return (
-    <NavigationContainer>
-      {user ? <HomeTabs /> : <AuthStack />}
-    </NavigationContainer>
-  )
+  return user ? <HomeTabs /> : <AuthStack />
 }
