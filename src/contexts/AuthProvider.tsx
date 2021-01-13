@@ -20,8 +20,8 @@ type AuthContext = {
 export const AuthContext = React.createContext<AuthContext>({
   user: null,
   loading: true,
-  login: () => { },
-  logout: () => { },
+  login: () => {},
+  logout: () => {},
 })
 
 export const AuthProvider: React.FC<Props> = ({ children }) => {
